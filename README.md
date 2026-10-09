@@ -59,5 +59,4 @@ python app.py
 - `backend/db.py` — koneksi Firebase
 - `templates/layout/` — base template (`admin_base.html`, `user_base.html`)
 
-## Lisensi
-Pribadi / Internal — sesuaikan sebelum publikasi komersial.
+
