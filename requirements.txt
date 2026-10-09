@@ -1,8 +1,3 @@
-faster-whisper
-sounddevice
-numpy
-pyttsx3
-pystray
-Pillow
-psutil
-requests
+Flask==3.0.3
+firebase-admin==6.5.0
+Werkzeug==3.0.3
