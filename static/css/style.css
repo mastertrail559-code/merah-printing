@@ -1,0 +1,298 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar_brand {
+  height: 45px;
+  width: auto;
+}
+
+.slider-img {
+    width: 100%;
+    height: 500px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* Produk guy Card Setail */ 
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: 0.3s ease;
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-img {
+  width: 100%;
+  height: 300px;   
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-img img {
+  width: 85%;
+  height: 85%;
+  object-fit: cover;
+}
+
+.product-body {
+  padding: 18px;
+}
+
+
+.product-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.product-price {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.product-price span {
+  color: rgb(3, 3, 3);
+  font-weight: 600;
+}
+
+.btn-chekout {
+  display: inline-block;
+  padding: 8px 18px;
+  background: orange;
+  color: #fff;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.btn-detail:hover {
+  background: #e68900;
+}
+
+/* Checkout darah Setail */
+
+.checkout-wrapper {
+    padding: 40px 20px;
+}
+
+.checkout-card {
+    display: flex;
+    max-width: 1100px;
+    margin: auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.checkout-left {
+    flex: 1;
+    background: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.checkout-left img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.checkout-right {
+    flex: 1;
+    padding: 40px;
+}
+
+.checkout-right h2 {
+    margin-bottom: 20px;
+}
+
+.section {
+    margin-bottom: 25px;
+}
+
+.section h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row select {
+    flex: 1;
+}
+
+.total-box {
+    background: #fff8ec;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.total-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.btn-checkout {
+    width: 100%;
+    padding: 12px;
+    background: #f39c12;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-checkout:hover {
+    background: #e67e22;
+}
+
+
+@media (max-width: 768px) {
+    .checkout-card {
+        flex-direction: column;
+    }
+}
+
+/* sukses Page Setail*/
+
+.success-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 20px;
+}
+
+.success-card {
+    background: #ffffff;
+    padding: 50px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.icon-success {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: #2ecc71;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.success-card h2 {
+    margin-bottom: 15px;
+}
+
+.success-card p {
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.btn-home {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #f39c12;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-home:hover {
+    background: #e67e22;
+}
+
+/* Footer Setail */
+
+.footer-full {
+  margin-top: auto;
+  width: 100%;
+  background-color: #141414;
+  padding: 25px 0;
+  text-align: center;
+}
+
+.footer-left {
+  color: #fbfdff;
+  font-size: 14px;
+
+}
+
+.table-container {
+    padding: 20px;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Header */
+.custom-table thead {
+    background-color: #ef0e0e;
+    color: white;
+}
+
+.custom-table th {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #dcdcdc;
+}
+
+/* Isi tabel */
+.custom-table td {
+    padding: 12px;
+    border: 1px solid #dcdcdc;  /* GARIS PEMBATAS */
+    color: #333;
+}
+
+/* Biar selang-seling halus */
+.custom-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

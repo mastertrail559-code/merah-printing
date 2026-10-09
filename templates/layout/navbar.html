@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navbar – Merah Printing</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── NAVBAR ── */
+  nav {
+    width: 100%;
+    background: #f9f6f1;
+    border-bottom: 1px solid #e0dbd3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 68px;
+    box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0;
+  }
+
+  .navbar-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    height: 68px;
+    gap: 1.5rem;
+    padding: 0 2rem;
+    box-sizing: border-box;
+  }
+
+  /* ── LOGO ── */
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .navbar-logo img {
+    height: 44px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* ── DIVIDER ── */
+  .navbar-sep {
+    width: 1px;
+    height: 28px;
+    background: #e0dbd3;
+    flex-shrink: 0;
+  }
+
+  /* ── NAV LINKS ── */
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: .15rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+  }
+
+  .navbar-links a {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .45rem .75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: .875rem;
+    font-weight: 500;
+    color: #6b6560;
+    transition: background .18s, color .18s;
+    white-space: nowrap;
+  }
+
+  .navbar-links a:hover {
+    background: #ede9e2;
+    color: #1a1a1a;
+  }
+
+  .navbar-links a.active {
+    background: #f3ede5;
+    color: #d63c2f;
+  }
+
+  .navbar-links a svg { opacity: .55; flex-shrink: 0; }
+  .navbar-links a:hover svg,
+  .navbar-links a.active svg { opacity: 1; }
+
+  /* ── RIGHT SIDE ── */
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* Search */
+  .navbar-search {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background: #eee9e1;
+    border: 1px solid #e0dbd3;
+    border-radius: 8px;
+    padding: .4rem .75rem;
+    transition: border-color .18s, box-shadow .18s;
+    cursor: text;
+  }
+
+  .navbar-search:focus-within {
+    border-color: #c8b9a8;
+    box-shadow: 0 0 0 3px rgba(214,60,47,.08);
+  }
+
+  .navbar-search input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .83rem;
+    color: #1a1a1a;
+    width: 130px;
+  }
+
+  .navbar-search input::placeholder { color: #b0a89e; }
+
+  /* Account button */
+  .navbar-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #eee9e1;
+    border: 1.5px solid #e0dbd3;
+    cursor: pointer;
+    text-decoration: none;
+    color: #6b6560;
+    flex-shrink: 0;
+    transition: background .18s, border-color .18s, color .18s, box-shadow .18s;
+  }
+
+  .navbar-account:hover {
+    background: #f3ede5;
+    border-color: #c8b9a8;
+    color: #d63c2f;
+    box-shadow: 0 2px 8px rgba(214,60,47,.15);
+  }
+
+  /* CTA button */
+  .navbar-cta {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    background: #d63c2f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: .5rem 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background .18s, transform .12s, box-shadow .18s;
+    box-shadow: 0 2px 8px rgba(214,60,47,.3);
+    letter-spacing: -.01em;
+  }
+
+  .navbar-cta:hover {
+    background: #b52e22;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(214,60,47,.4);
+  }
+
+  .navbar-cta:active { transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navbar-container">
+    <!-- LOGO -->
+    <a href="{{ url_for('main.index') }}" class="navbar-logo">
+      <img src="{{ url_for('static', filename='images/api.png') }}" alt="Merah Printing Logo">
+    </a>
+
+    <div class="navbar-sep"></div>
+
+    <!-- LINKS -->
+    <ul class="navbar-links">
+      <li>
+        <a href="{{ url_for('main.index') }}" {% if request.path == '/' %}class="active"{% endif %}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Beranda
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('main.produk') }}" {% if request.path == '/produk' %}class="active"{% endif %}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Produk
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('main.kontak') }}" {% if request.path == '/kontak' %}class="active"{% endif %}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Kontak
+        </a>
+      </li>
+    </ul>
+
+    <!-- RIGHT -->
+    <div class="navbar-right">
+      <div class="navbar-search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b0a89e" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Cari layanan…">
+      </div>
+
+      <a href="{{ url_for('main.pesanan') }}" class="navbar-account" title="Lihat Pesanan">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+</body>
+</html>

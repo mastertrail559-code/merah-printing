@@ -1,0 +1,70 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --footer--bg:    #111110;
+  --footer--line:  rgba(255,255,255,.07);
+  --footer--dim:   rgba(255,255,255,.35);
+  --footer--bright:#ffffff;
+  --footer--red:   #d63c2f;
+}
+
+
+/* ── FOOTER ── */
+footer {
+  width: 100%;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  padding: 0 2.5rem;
+}
+
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  gap: 1.5rem;
+}
+
+/* ── COPYRIGHT ── */
+.footer-copy {
+  font-size: .75rem;
+  font-weight: 400;
+  color: var(--dim);
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+.footer-copy span {
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* ── SOCIAL ICONS ── */
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  list-style: none;
+}
+
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color .2s, transform .2s;
+}
+
+.footer-socials a:hover {
+  color: var(--bright);
+  transform: translateY(-2px);
+}
+
+.footer-socials svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  display: block;
+}

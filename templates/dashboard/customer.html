@@ -1,0 +1,32 @@
+        {% extends "layout/admin_base.html" %}
+
+        {% block content %}
+
+        <div class="table-container">
+        <table class="custom-table">
+        <thead>
+                <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Nomor Telepon</th>
+                <th>Alamat</th>
+                <th>Jumlah Pesanan</th>
+                </tr>
+        </thead>
+        <tbody>
+                {% for customer in customers %}
+                <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.alamat }}</td>
+                <td><span class="badge bg-info">{{ customer.order_count }}</span></td>
+                </tr>
+                {% endfor %}
+        </tbody>
+        </table>
+        </div>
+
+        {% endblock %}

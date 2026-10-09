@@ -1,0 +1,89 @@
+{% extends "layout/user_base.html" %}
+
+{% block content %}
+
+<div class="checkout-wrapper">
+
+    <div class="checkout-card">
+
+        <!-- KIRI: GAMBAR PRODUK -->
+        <div class="checkout-left">
+            <img src="{{ url_for('static', filename='images/sablon.png') }}" alt="Preview Baju">
+        </div>
+
+        <!-- KANAN: FORM -->
+        <div class="checkout-right">
+
+            <h2>Checkout Sablon Baju</h2>
+
+            <form action="{{ url_for('main.checkout_baju') }}" method="POST">
+
+                <div class="section">
+                    <h3>Informasi Customer</h3>
+
+                    <input type="text" name="name" placeholder="Nama Lengkap" required>
+                    <input type="text" name="phone" placeholder="No WhatsApp" required>
+                    <input type="text" name="alamat" placeholder="Alamat Lengkap" required>
+                    <textarea name="note" placeholder="Catatan tambahan (opsional)"></textarea>
+                </div>
+
+                <div class="section">
+                    <h3>Detail Produk</h3>
+
+                    <div class="row">
+                        <select id="baju_color" name="baju_color">
+                            <option value="Putih">Putih</option>
+                            <option value="Hitam">Hitam</option>
+                            <option value="Merah">Merah</option>
+                            <option value="Biru">Biru</option>
+                            <option value="Kuning">Kuning</option>
+                            <option value="Navy">Navy</option>
+                        </select>
+
+                        <select id="baju_size" name="baju_size">
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
+
+                        <select id="print_type" name="print_type">
+                            <option value="DTg">DTG (Full Color)</option>
+                            <option value="Sablon">Sablon Biasa</option>
+                            <option value="Rubber">Rubber Print</option>
+                        </select>
+
+                    </div>
+                    <input type="hidden" name="product" value="Baju">
+                    <input type="number" id="quantity" name="quantity" min="1" value="1">
+                    <input type="hidden" name="total_price" id="totalInput" action="" method="">
+                </div>
+
+                <div class="section total-box">
+                    <h3>Total Harga</h3>
+                    <div class="total-price">
+                        Rp <span id="totalHarga">0</span>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <select name="payment_method">
+                        <option value="Transfer">Transfer</option>
+                        <option value="COD">COD</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-checkout">Checkout Sekarang</button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/jav.js') }}"></script>
+
+{% endblock %}

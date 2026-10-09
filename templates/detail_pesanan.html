@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Pesanan – Merah Printing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/detail_pesanan.css') }}">
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+    }
+    main {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+  {% include 'layout/navbar_pesanan.html' %}
+
+  <main>
+    <div class="detail-wrapper">
+
+      <!-- BACK HEADER -->
+      <div class="detail-header">
+        <a href="{{ url_for('main.pesanan') }}" class="back-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+          </svg>
+          Pesanan {{ order.id[:8] | upper }}
+        </a>
+        <div class="order-status">
+          {% set status_class = 'selesai' %}
+          {% if order.status == 'selesai' %}
+            {% set status_class = 'selesai' %}
+          {% elif order.status == 'dikirim' %}
+            {% set status_class = 'dikirim' %}
+          {% elif order.status == 'di gudang' %}
+            {% set status_class = 'di-gudang' %}
+          {% elif order.status == 'dikerjakan' %}
+            {% set status_class = 'dikerjakan' %}
+          {% elif order.status == 'diterima' %}
+            {% set status_class = 'diterima' %}
+          {% else %}
+            {% set status_class = 'proses' %}
+          {% endif %}
+          <span class="status-badge {{ status_class }}">{{ order.status | capitalize }}</span>
+          <span class="status-date">{{ order.order.order_date.strftime('%d %b %Y') }}</span>
+        </div>
+      </div>
+
+      <!-- TWO COLUMN LAYOUT -->
+      <div class="detail-container">
+
+        <!-- LEFT COLUMN -->
+        <div class="detail-left">
+
+          <!-- SHIPPING STATUS CARD -->
+          <div class="status-card">
+            <div class="status-content">
+              <h3 class="status-title">Status Pesanan</h3>
+              <p class="status-date-range">{{ order.order.order_date.strftime('%d %b %Y') }}</p>
+              
+              <div class="tracking-info">
+                <div class="document-id">
+                  <span class="label">ID Dokumen</span>
+                  <span class="value">{{ order.id[:8] | upper }}</span>
+                </div>
+              </div>
+
+              <div class="timeline-section">
+                <button class="timeline-toggle" onclick="toggleTimeline()">
+                  <span>Tampilkan detail</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </button>
+
+                <div class="timeline" id="timelineDetail" style="display: none;">
+                  <div class="timeline-item">
+                    <div class="timeline-marker {% if order.status == 'diterima' %}active{% endif %}"></div>
+                    <div class="timeline-content">
+                      <p class="timeline-status">Diterima</p>
+                      {% if order.status == 'diterima' %}
+                      <p class="timeline-date">{{ order.order.order_date.strftime('%d %b %Y') }}</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-marker {% if order.status == 'dikerjakan' %}active{% endif %}"></div>
+                    <div class="timeline-content">
+                      <p class="timeline-status">Dikerjakan</p>
+                      {% if order.status == 'dikerjakan' %}
+                      <p class="timeline-date">{{ order.order.order_date.strftime('%d %b %Y') }}</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-marker {% if order.status == 'di gudang' %}active{% endif %}"></div>
+                    <div class="timeline-content">
+                      <p class="timeline-status">Di Gudang</p>
+                      {% if order.status == 'di gudang' %}
+                      <p class="timeline-date">{{ order.order.order_date.strftime('%d %b %Y') }}</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-marker {% if order.status == 'dikirim' %}active{% endif %}"></div>
+                    <div class="timeline-content">
+                      <p class="timeline-status">Dikirim</p>
+                      {% if order.status == 'dikirim' %}
+                      <p class="timeline-date">{{ order.order.order_date.strftime('%d %b %Y') }}</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-marker {% if order.status == 'selesai' %}active{% endif %}"></div>
+                    <div class="timeline-content">
+                      <p class="timeline-status">Selesai</p>
+                      {% if order.status == 'selesai' %}
+                      <p class="timeline-date">{{ order.order.order_date.strftime('%d %b %Y') }}</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTACT & BILLING INFO -->
+          <div class="info-section">
+            <div class="info-column">
+              <h4 class="info-title">Informasi Kontak</h4>
+              <div class="info-item">
+                <p class="info-label">Nama</p>
+                <p class="info-value">{{ order.customer.name }}</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">Email</p>
+                <p class="info-value">{{ order.customer.email }}</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">Nomor Telepon</p>
+                <p class="info-value">{{ order.customer.phone }}</p>
+              </div>
+            </div>
+
+            <div class="info-column">
+              <h4 class="info-title">Alamat Pengiriman</h4>
+              <div class="info-item">
+                <p class="info-label">Nama Penerima</p>
+                <p class="info-value">{{ order.customer.name }}</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">Alamat</p>
+                <p class="info-value">{{ order.customer.alamat }}</p>
+              </div>
+              <div class="info-item">
+                <p class="info-label">Nomor Telepon</p>
+                <p class="info-value">{{ order.customer.phone }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAYMENT METHOD -->
+          <div class="payment-section">
+            <h4 class="section-title">Metode Pembayaran</h4>
+            <p class="payment-method">{{ order.order.pembayaran }}</p>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="detail-right">
+
+          <!-- ORDER ITEMS -->
+          <div class="order-items-section">
+            <h3 class="section-title">Detail Pesanan</h3>
+
+            <div class="order-item">
+              {% if order.order.produk == 'Mug' %}
+              <img src="{{ url_for('static', filename='images/mug.png') }}" alt="Mug" class="item-image">
+              {% elif order.order.produk == 'Baju' %}
+              <img src="{{ url_for('static', filename='images/sablon.png') }}" alt="Baju" class="item-image">
+              {% elif order.order.produk == 'Tumbler' %}
+              <img src="{{ url_for('static', filename='images/tumbler.png') }}" alt="Tumbler" class="item-image">
+              {% endif %}
+
+              <div class="item-details">
+                <div class="item-header">
+                  <h4 class="item-name">{{ order.order.produk }}</h4>
+                  <span class="item-qty">{{ order.order.jumlah }} pcs</span>
+                </div>
+
+                <div class="item-specs">
+                  {% if order.order.produk == 'Mug' %}
+                    <p><span class="spec-label">Warna:</span> {{ order.order.mug_color }}</p>
+                    <p><span class="spec-label">Ukuran:</span> {{ order.order.mug_size }}</p>
+                    <p><span class="spec-label">Area Cetak:</span> {{ order.order.print_area }}</p>
+                  {% elif order.order.produk == 'Baju' %}
+                    <p><span class="spec-label">Warna:</span> {{ order.order.baju_color }}</p>
+                    <p><span class="spec-label">Ukuran:</span> {{ order.order.baju_size }}</p>
+                    <p><span class="spec-label">Jenis Cetak:</span> {{ order.order.print_type }}</p>
+                  {% elif order.order.produk == 'Tumbler' %}
+                    <p><span class="spec-label">Warna:</span> {{ order.order.tumbler_color }}</p>
+                    <p><span class="spec-label">Tipe:</span> {{ order.order.tumbler_type }}</p>
+                    <p><span class="spec-label">Ukuran:</span> {{ order.order.tumbler_size }}</p>
+                  {% endif %}
+                </div>
+
+                {% if order.customer.note %}
+                <div class="item-note">
+                  <p><span class="spec-label">Catatan:</span> {{ order.customer.note }}</p>
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="item-price">
+                <p class="price">Rp {{ "{:,.0f}".format(order.order.total | int) }}</p>
+              </div>
+            </div>
+
+            <!-- PRICE SUMMARY -->
+            <div class="price-summary">
+              <div class="summary-row">
+                <span>Subtotal ({{ order.order.jumlah }} item)</span>
+                <span>Rp {{ "{:,.0f}".format(order.order.total | int) }}</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total</span>
+                <span>Rp {{ "{:,.0f}".format(order.order.total | int) }}</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ORDER AGAIN BUTTON -->
+          <button class="btn-order-again" onclick="beliLagi('{{ order.id }}')">Pesan Lagi</button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-copy">
+        © 2026, <span>Merah Printing</span>. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTimeline() {
+      const timeline = document.getElementById('timelineDetail');
+      timeline.style.display = timeline.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function beliLagi(orderId) {
+      // Redirect to home or product page
+      window.location.href = "{{ url_for('main.index') }}";
+    }
+  </script>
+
+</body>
+</html>

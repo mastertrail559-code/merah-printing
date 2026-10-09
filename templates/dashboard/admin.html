@@ -1,0 +1,61 @@
+        {% extends "layout/admin_base.html" %}
+
+        {% block content %}
+
+        <div class="table-container">
+        <table class="custom-table">
+        <thead>
+        <tr>
+                <th>No</th>
+                <th>Pesanan</th>
+                <th>Warna</th>
+                <th>Ukuran</th>
+                <th>Print Area</th>
+                <th>Jumlah</th>
+                <th>Pembayaran</th>
+                <th>Total Bayar</th>
+                <th>Status</th>
+                <th>Tanggal Pemesanan</th>
+                <th>Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ord in orders %}
+        <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ ord.order.produk }}</td>
+                <td>{{ ord.order.mug_color }}</td>
+                <td>{{ ord.order.mug_size }}</td>
+                <td>{{ ord.order.print_area }}</td>
+                <td>{{ ord.order.jumlah }}</td>
+                <td>{{ ord.order.pembayaran }}</td>
+                <td>{{ ord.order.total }}</td>
+                <td>
+
+                <form method="POST" action="{{ url_for('dashboard.ubah', doc_id=ord.id) }}" style="display:inline;">
+                <select name="status" class="form-select form-select-sm"
+                        onchange="if(confirm('Ubah status pesanan?')) this.form.submit();">
+                <option value="diterima" {% if ord.status == 'diterima' %}selected{% endif %}>Diterima</option>
+                <option value="dikerjakan" {% if ord.status == 'dikerjakan' %}selected{% endif %}>Dikerjakan</option>
+                <option value="di gudang" {% if ord.status == 'di gudang' %}selected{% endif %}>Di Gudang</option>
+                <option value="dikirim" {% if ord.status == 'dikirim' %}selected{% endif %}>Dikirim</option>
+                <option value="selesai" {% if ord.status == 'selesai' %}selected{% endif %}>Selesai</option>
+                </select>
+                </form>
+                </td>
+                <td>{{ ord.order.order_date }}</td>
+                <td>
+
+                <a href="{{ url_for('dashboard.hapus', doc_id=ord.id) }}"
+                onclick="return confirm('Hapus pesanan?')"
+                class="btn btn-danger btn-sm" style="text-decoration:none;">
+                Hapus
+                </a>
+                </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        </div>
+
+        {% endblock %}
